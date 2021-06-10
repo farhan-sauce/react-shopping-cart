@@ -67,7 +67,7 @@ class App extends Component {
     let productID = selectedProducts.id;
     let productQty = selectedProducts.quantity;
     if (this.checkProduct(productID)) {
-      console.log("hi");
+      console.log("Add To Cart: ", productID);
       let index = cartItem.findIndex(x => x.id == productID);
       cartItem[index].quantity =
         Number(cartItem[index].quantity) + Number(productQty);
@@ -87,8 +87,8 @@ class App extends Component {
           cartBounce: false,
           quantity: 1
         });
-        console.log(this.state.quantity);
-        console.log(this.state.cart);
+        console.log("quantity:", this.state.quantity);
+        console.log("cart:", JSON.stringify(this.state.cart));
       }.bind(this),
       1000
     );
@@ -108,6 +108,7 @@ class App extends Component {
   }
   checkProduct(productID) {
     let cart = this.state.cart;
+    console.log("Check Product: ", productID);
     return cart.some(function(item) {
       return item.id === productID;
     });
@@ -116,6 +117,7 @@ class App extends Component {
     let total = 0;
     let cart = this.state.cart;
     total = cart.length;
+    console.log("Total Items: ", total);
     this.setState({
       totalItems: total
     });
@@ -126,20 +128,28 @@ class App extends Component {
     for (var i = 0; i < cart.length; i++) {
       total += cart[i].price * parseInt(cart[i].quantity);
     }
+    console.log("Total amount: ", total);
     this.setState({
       totalAmount: total
     });
   }
 
   //Reset Quantity
-  updateQuantity(qty) {
-    console.log("quantity added...");
+  updateQuantity(qty, name) {
+    if (qty < 5) {
+      console.log(`${qty} quantity added for ${name}`);
+    } else if (qty <= 10) {
+      console.log(`Maximum 10 quantities are allowed for ${name}, current count: ${qty}`);
+    } else {
+      console.error(new Error(`More than 10 quantities are not allowed for ${name}`))
+    }
     this.setState({
       quantity: qty
     });
   }
   // Open Modal
   openModal(product) {
+    console.log("Open Modal", JSON.stringify(product));
     this.setState({
       quickViewProduct: product,
       modalActive: true

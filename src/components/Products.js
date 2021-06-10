@@ -7,6 +7,7 @@ import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
 class Products extends Component {
   constructor() {
     super();
+    console.log('Products are loaded');
   }
   render() {
     let productsData;

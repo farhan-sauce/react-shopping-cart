@@ -80,7 +80,7 @@ class Product extends Component {
         <p className="product-price">{this.props.price}</p>
         <Counter
           productQuantity={quantity}
-          updateQuantity={this.props.updateQuantity}
+          updateQuantity={(qty) => this.props.updateQuantity(qty, this.props.name)}
           resetQuantity={this.resetQuantity}
         />
         <div className="product-action">

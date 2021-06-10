@@ -4,6 +4,7 @@ const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const CleanWbepackPlugin = require("clean-webpack-plugin");
 
+const PUBLIC_URL = '/react-shopping-cart/'
 const webpackCommon = require("./webpack.common");
 
 const pathsToClean = ["docs"];
@@ -15,7 +16,7 @@ module.exports = merge.smart(webpackCommon, {
   output: {
     filename: "main.[chunkhash].js",
     path: path.resolve(__dirname, "../docs"),
-    publicPath: "/"
+    publicPath: PUBLIC_URL
   },
   mode: "production",
   optimization: {
