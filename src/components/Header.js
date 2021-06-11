@@ -212,6 +212,7 @@ class Header extends Component {
                 <button
                   type="button"
                   className={this.state.cart.length > 0 ? " " : "disabled"}
+                  onClick={this.props.checkout}
                 >
                   PROCEED TO CHECKOUT
                 </button>

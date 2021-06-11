@@ -61,7 +61,7 @@ class Product extends Component {
     let id = this.props.id;
     let quantity = this.props.productQuantity;
     return (
-      <div className="product">
+      <div className={`product product-${id}`}>
         <div className="product-image">
           <img
             src={image}

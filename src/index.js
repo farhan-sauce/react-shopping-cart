@@ -33,6 +33,7 @@ class App extends Component {
     this.handleRemoveProduct = this.handleRemoveProduct.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.checkout = this.checkout.bind(this);
   }
   // Fetch Initial Set of Products from external API
   getProducts() {
@@ -139,7 +140,7 @@ class App extends Component {
     if (qty < 5) {
       console.log(`${qty} quantity added for ${name}`);
     } else if (qty <= 10) {
-      console.log(`Maximum 10 quantities are allowed for ${name}, current count: ${qty}`);
+      console.warn(`Maximum 10 quantities are allowed for ${name}, current count: ${qty}`);
     } else {
       console.error(new Error(`More than 10 quantities are not allowed for ${name}`))
     }
@@ -161,6 +162,13 @@ class App extends Component {
       modalActive: false
     });
   }
+  checkout() {
+    axios.get('https://reqres.in/api/users/23')
+    .catch((e) => {
+      console.error('Fetching userDetail failed')
+      throw new Error(e);
+    })
+  }
 
   render() {
     return (
@@ -177,6 +185,7 @@ class App extends Component {
           categoryTerm={this.state.category}
           updateQuantity={this.updateQuantity}
           productQuantity={this.state.moq}
+          checkout={this.checkout}
         />
         <Products
           productsList={this.state.products}
